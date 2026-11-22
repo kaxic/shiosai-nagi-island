@@ -267,8 +267,9 @@ public static class IslandSave
                 else
                 {
                     // Do not rotate a corrupt primary over the last usable backup.
-                    File.Replace(temp, path, status == FileStatus.Valid ? backup : null);
+                    BrowserTools.ReplaceFile(temp, path, status == FileStatus.Valid ? backup : null);
                 }
+                BrowserTools.Saved();
                 return true;
             }
             catch (Exception ex) when (IsFileError(ex))

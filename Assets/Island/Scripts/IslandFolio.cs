@@ -16,8 +16,8 @@ public sealed class IslandFolio : MonoBehaviour
     {
         cover = Resources.Load<Texture2D>("Island/Media/Harbor");
         specimens = Resources.Load<Texture2D>("Island/Media/Specimens");
-        sans = Font.CreateDynamicFontFromOSFont(new[]{"Meiryo","Yu Gothic","Arial"},24);
-        serif = Font.CreateDynamicFontFromOSFont(new[]{"Yu Mincho","MS Mincho","Meiryo"},48);
+        sans = BrowserTools.ReadableFont(new[]{"Meiryo","Yu Gothic","Arial"},24);
+        serif = BrowserTools.ReadableFont(new[]{"Yu Mincho","MS Mincho","Meiryo"},48);
         shade = new Texture2D(128,1,TextureFormat.RGBA32,false);
         for (int x = 0; x < 128; x++) shade.SetPixel(x,0,new Color(.025f,.12f,.12f,
             .86f * (1-Mathf.SmoothStep(0,1,x/115f))));

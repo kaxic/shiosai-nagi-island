@@ -464,6 +464,8 @@ public sealed partial class IslandGame : MonoBehaviour
         Commit();
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_WEBGL
+        BrowserTools.ReturnToCover();
 #else
         Application.Quit();
 #endif

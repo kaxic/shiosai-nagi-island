@@ -2,6 +2,8 @@
 
 小さな島で家と畑を整え、港に船を呼ぶWindows向けの3D開拓ゲームです。渡し守の最初の頼みは、傷んだ船着き場の修繕。木と岩のそばで E を押して木材3と石2を集めましょう。J で依頼を開き、「依頼を納品する」を押すと第一便が出ます。
 
+**[ブラウザーで遊ぶ](https://kaxic.github.io/shiosai-nagi-island/)**
+
 ![凪島だよりのゲーム画面](IslandPreview.jpg)
 
 [遊び方と手動で拡張する方法](遊び方と編集.md)
@@ -9,3 +11,5 @@
 ## Unityで開く
 
 Unity Hubでこのフォルダーを追加し、Unity 6000.3.28f1で `Assets/Island/Scenes/NagiIsland.unity` を開いて再生します。
+
+Web版は Web Build Support を追加し、Unity の **Shiosai → Build browser game** から再ビルドできます。出力先は `docs` です。

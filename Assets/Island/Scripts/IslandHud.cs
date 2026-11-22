@@ -26,8 +26,8 @@ public partial class IslandHud : MonoBehaviour
 
     void Awake()
     {
-        body = Font.CreateDynamicFontFromOSFont(new[] { "Meiryo", "Yu Gothic", "Hiragino Sans", "Noto Sans CJK JP", "Noto Sans JP", "Arial Unicode MS", "Arial" }, 24);
-        title = Font.CreateDynamicFontFromOSFont(new[] { "Yu Mincho", "MS Mincho", "Hiragino Mincho ProN", "Noto Serif CJK JP", "Meiryo", "Arial Unicode MS", "Arial" }, 32);
+        body = BrowserTools.ReadableFont(new[] { "Meiryo", "Yu Gothic", "Hiragino Sans", "Noto Sans CJK JP", "Noto Sans JP", "Arial Unicode MS", "Arial" }, 24);
+        title = BrowserTools.ReadableFont(new[] { "Yu Mincho", "MS Mincho", "Hiragino Mincho ProN", "Noto Serif CJK JP", "Meiryo", "Arial Unicode MS", "Arial" }, 32);
         corner = RoundedTexture();
         foreach (string name in SymbolNames)
             symbols.Add(name, MakeSymbol(name));

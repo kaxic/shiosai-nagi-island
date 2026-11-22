@@ -17,8 +17,8 @@ public sealed class IslandExhibitionHud : MonoBehaviour
 
     void Awake()
     {
-        sans = Font.CreateDynamicFontFromOSFont(new[] {"Meiryo", "Yu Gothic", "Noto Sans CJK JP", "Arial"}, 24);
-        serif = Font.CreateDynamicFontFromOSFont(new[] {"Yu Mincho", "MS Mincho", "Meiryo", "Arial"}, 32);
+        sans = BrowserTools.ReadableFont(new[] {"Meiryo", "Yu Gothic", "Noto Sans CJK JP", "Arial"}, 24);
+        serif = BrowserTools.ReadableFont(new[] {"Yu Mincho", "MS Mincho", "Meiryo", "Arial"}, 32);
     }
     void OnDestroy() { if (sans) Destroy(sans); if (serif && serif != sans) Destroy(serif); }
 

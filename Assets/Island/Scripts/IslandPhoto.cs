@@ -8,9 +8,13 @@ public sealed class IslandPhoto : MonoBehaviour
     public IslandGame game;
     public static string ReviewDirectory()
     {
+        #if UNITY_WEBGL && !UNITY_EDITOR
+        return null;
+#else
         var args=Environment.GetCommandLineArgs();
         int n=Array.IndexOf(args,"-nagiReviewDir");
         return n>=0 && n+1<args.Length ? Path.GetFullPath(args[n+1]) : null;
+#endif
     }
     IEnumerator Start()
     {
@@ -41,7 +45,7 @@ public sealed class IslandPhoto : MonoBehaviour
         var shot=ScreenCapture.CaptureScreenshotAsTexture();
         try
         {
-            Directory.CreateDirectory(Path.GetDirectoryName(path));File.WriteAllBytes(path,shot.EncodeToPNG());
+            Directory.CreateDirectory(Path.GetDirectoryName(path));BrowserTools.Picture(path,shot.EncodeToPNG());
         }
         finally {Destroy(shot);busy=false;}
     }
