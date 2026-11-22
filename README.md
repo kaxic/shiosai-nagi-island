@@ -4,6 +4,8 @@
 
 **[ブラウザーで遊ぶ](https://kaxic.github.io/shiosai-nagi-island/)**
 
+[実際のプレイ映像を見る](https://kaxic.github.io/shiosai-nagi-island/media/demo.mp4)
+
 ![凪島だよりのゲーム画面](IslandPreview.jpg)
 
 [遊び方と手動で拡張する方法](遊び方と編集.md)
