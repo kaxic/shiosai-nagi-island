@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03e3608ae00d0f34a9ee39ede2eefd1e, type: 3}
+  m_Name: 04_Table
+  m_EditorClassIdentifier: Assembly-CSharp::FurnitureRecipe
+  id: table
+  displayName: "\u6F6E\u98A8\u306E\u30C6\u30FC\u30D6\u30EB"
+  woodCost: 4
+  stoneCost: 2
+  unlockAfterChapters: 2
+  prefab: {fileID: 8497507718817133472, guid: c57f4737b5162664e92c3c316f8c5f56, type: 3}

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03e3608ae00d0f34a9ee39ede2eefd1e, type: 3}
+  m_Name: 06_Brazier
+  m_EditorClassIdentifier: Assembly-CSharp::FurnitureRecipe
+  id: brazier
+  displayName: "\u661F\u898B\u306E\u706B\u9262"
+  woodCost: 2
+  stoneCost: 6
+  unlockAfterChapters: 4
+  prefab: {fileID: 8453141469723658070, guid: 91fe3bbbd1de7534d972cc47e50839a4, type: 3}
