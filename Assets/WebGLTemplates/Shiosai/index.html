@@ -2,23 +2,32 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#15272a"><title>A 島の開拓と庭づくり | 潮彩作品集</title>
+  <meta name="theme-color" content="#15272a"><meta name="description" content="木を切り出し、石を集めて、傷んだ船着き場を直すところから始まります。港に船を呼んだら、白砂の離島にも渡って、自分好みの海辺の庭をつくれます。">
+  <title>A島開拓ゲーム | 潮彩ゲーム棚</title>
   <link rel="icon" href="icon.png"><link rel="stylesheet" href="player.css"><link rel="stylesheet" href="touch.css"><script defer src="touch.js"></script>
 </head>
 <body>
 <header><a class="imprint" id="library-home" href="https://kaxic.github.io/shiosai-game-library/#A"><span aria-hidden="true">← </span>ゲーム一覧</a><span id="home-status" role="status"></span><a href="https://github.com/kaxic/shiosai-nagi-island">GitHub ↗</a></header>
 <main>
   <section id="stage" aria-label="ゲーム画面">
-    <canvas id="game" data-game="Island" width="1280" height="720" tabindex="0" aria-label="A 島の開拓と庭づくりのゲーム画面"></canvas>
+    <canvas id="game" data-game="Island" width="1280" height="720" tabindex="0" aria-label="A島開拓ゲームのゲーム画面"></canvas>
     <div id="cover">
-      <div class="titleblock"><p class="genre">凪島だより</p><h1>A 島の開拓と庭づくり</h1><p class="intro">海辺に小屋を構え、庭をつくる。
-波打ち際の標本を集め、港に船を呼ぶ島の暮らし。</p>
-        <button id="launch">ゲームを開始 <span aria-hidden="true">›</span></button>
+      <div class="titleblock"><p class="genre">凪島だより</p><h1>A島開拓ゲーム</h1><p class="intro">木を切り出し、石を集めて、傷んだ船着き場を直すところから始まります。港に船を呼んだら、白砂の離島にも渡って、自分好みの海辺の庭をつくれます。</p>
+        <div class="cover-actions"><button id="launch">ゲームを開始 <span aria-hidden="true">›</span></button>
+          <a href="#how-to-play">遊び方を読む <span aria-hidden="true">↓</span></a></div>
         <div id="status" role="status" aria-live="polite"></div><progress id="meter" max="1" value="0" hidden></progress>
       </div>
     </div>
   </section>
-  <div class="bar"><span class="wordmark">A 島の開拓と庭づくり</span><div class="buttons"><button id="help">操作方法</button><button id="full">全画面</button><a id="demo" href="media/demo.mp4" hidden>プレイ映像 ▷</a></div></div>
+  <div class="bar"><span class="wordmark">A島開拓ゲーム</span><div class="buttons"><button id="help">操作方法</button><button id="full">全画面</button><a id="demo" href="media/demo.mp4" hidden>プレイ映像 ▷</a></div></div>
+  <section class="play-guide" id="how-to-play" aria-labelledby="guide-title" tabindex="-1">
+    <h2 id="guide-title">このゲームの遊び方</h2>
+    <div class="guide-columns">
+      <section><h3>最初にすること</h3><p>小屋の近くの木と岩に歩み寄り、調べて木材を3つ、石を2つ集めましょう。依頼帳の「船着き場の修繕」から渡し守に納品すると、港に最初の船がやってきます。</p></section>
+      <section><h3>遊びの流れ</h3><p>畑でかぶを育て、作業台では集めた材料をベンチや花壇に仕立てます。家具は向きを変えて何度でも飾り直せます。依頼や出荷で得た貝貨を道具に使うと、採集や栽培もはかどります。</p></section>
+      <section><h3>目指すもの</h3><p>8章の開拓を終えて岬に灯台を建てた後は、定期便の注文が届きます。二つの島で18点の漂着物を図鑑に収めたり、18種類の家具を組み合わせて庭展の出品印を集めたりできます。</p></section>
+    </div>
+  </section>
   <dialog id="guide"><div class="dialogtop"><h2>操作方法</h2><button class="close">閉じる</button></div><p>キーボードとマウスで遊べます。進行はこのブラウザーに保存されます。</p><div id="controls">WASD・矢印で移動、Shiftで走ります。木や石のそばでEを押して採集します。
 Tabで家具袋、Rで回転や回収、Jで依頼、Uで強化、Escで手帳、F1で案内、F12で写真を撮れます。</div></dialog>
   <dialog id="album"><div class="dialogtop"><h2>写真の保存</h2><button class="close">閉じる</button></div><div id="prints"></div></dialog>

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public sealed partial class IslandGame : MonoBehaviour
 {
-    public const string TitleName = "A 島の開拓と庭づくり";
+    public const string TitleName = "A島開拓ゲーム";
     [Header("島の設定")]
     public Transform player;
     public Transform playerVisual;

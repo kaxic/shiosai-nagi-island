@@ -61,7 +61,7 @@ public sealed class IslandFolio : MonoBehaviour
         int titleSize = Mathf.Clamp(Mathf.FloorToInt(titleBox.width/IslandGame.TitleName.Length),38,58);
         Type(new Rect(titleBox.x+1.5f,titleBox.y+2,titleBox.width,titleBox.height),IslandGame.TitleName,titleSize,new Color(.05f,.10f,.10f,.82f),true);
         Type(titleBox,IslandGame.TitleName,titleSize,Paper,true);
-        Type(new Rect(x,y+134,415,57),"木を集め、畑を耕し、港から手紙を届ける。\n潮風の島で、今日の暮らしを始めよう。",16,Paper);
+        Type(new Rect(x,y+134,495,65),"木や岩を調べて、木材3つと石2つを集めよう。\n港に届けて船着き場を直し、自分の島を育てよう。",17,Paper);
         if(Button(new Rect(x,y+219,208,47),"島へ出かける　›",true)) game.ClosePanel();
         if(Button(new Rect(x+216,y+219,116,47),game.MusicOn?"音楽　ON":"音楽　OFF")) game.ToggleMusic();
         if(Button(new Rect(x,y+279,108,31),"ゲーム終了")) game.QuitGame();
