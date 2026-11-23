@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03e3608ae00d0f34a9ee39ede2eefd1e, type: 3}
+  m_Name: 15_windchime
+  m_EditorClassIdentifier: Assembly-CSharp::FurnitureRecipe
+  id: windchime
+  displayName: "\u785D\u5B50\u306E\u98A8\u9234\u68DA"
+  woodCost: 4
+  stoneCost: 3
+  unlockAfterChapters: 2
+  prefab: {fileID: 2501199400114343377, guid: 2b06713420408904b80a9c70876e81f1, type: 3}

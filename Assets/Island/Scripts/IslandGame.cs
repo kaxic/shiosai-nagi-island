@@ -94,7 +94,7 @@ public sealed partial class IslandGame : MonoBehaviour
 
     Vector2 FindOpenPoint()
     {
-        Vector2 start = new Vector2(0, -0.4f);
+        Vector2 start = new Vector2(RegionCenter, -0.4f);
         if (CanWalk(start)) return start;
         for (int radius = 1; radius < 16; radius++)
             for (int step = 0; step < 16; step++)
@@ -109,7 +109,7 @@ public sealed partial class IslandGame : MonoBehaviour
     bool CanWalk(Vector2 p)
     {
         if (float.IsNaN(p.x) || float.IsNaN(p.y)) return false;
-        float x = p.x / Mathf.Max(1, walkableRadii.x);
+        float x = (p.x-RegionCenter) / Mathf.Max(1, walkableRadii.x);
         float z = p.y / Mathf.Max(1, walkableRadii.y);
         if (x*x + z*z > 1) return false;
         foreach (var site in spots)
@@ -130,6 +130,7 @@ public sealed partial class IslandGame : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space)) ClosePanel();
             return;
         }
+        if (Panel == "" && !IsPlacing && Input.GetKeyDown(KeyCode.T)) { Sail(); return; }
         if ((Panel == "" || Panel == "orders") && Input.GetKeyDown(KeyCode.J))
         { if (Panel == "orders") ClosePanel(); else Open("orders"); return; }
         if ((Panel == "" || Panel == "tools") && Input.GetKeyDown(KeyCode.U))
@@ -167,9 +168,18 @@ public sealed partial class IslandGame : MonoBehaviour
         islandCamera.orthographicSize = Mathf.Lerp(islandCamera.orthographicSize, height * cameraZoom, 1 - Mathf.Exp(-7f * Time.deltaTime));
         Vector3 p = islandCamera.transform.position;
         float follow = Mathf.Clamp01(0.08f + (1 - cameraZoom) * 2.1f);
-        p.x = cameraHome.x + player.position.x * follow;
+        p.x = cameraHome.x + RegionCenter + (player.position.x-RegionCenter) * follow;
         p.z = cameraHome.y + player.position.z * follow;
         islandCamera.transform.position = p;
+    }
+
+    public float RegionCenter => State.passage ? 64f : 0f;
+    public void Sail()
+    {
+        if(IsPlacing || Panel.Length>0) return;
+        State.passage=!State.passage; player.position=OnGround(FindOpenPoint());
+        RefreshSpots(Now); RefreshFocus();
+        ActionDone(State.passage?"白砂の離島に到着　新しい3つの浜へ":"凪島に帰港しました",3);
     }
 
     void MovePlayer()

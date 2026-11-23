@@ -4,7 +4,7 @@ using UnityEngine;
 public sealed class IslandSpot : MonoBehaviour
 {
     public enum Kind { Tree, Stone, Workbench, Farm, Cabin, FurnitureSlot, TidePool }
-    [Range(0, 2)] public int shoreIndex;
+    [Range(0, 5)] public int shoreIndex;
 
     public Kind kind;
     [Tooltip("セーブに使う固定ID。複製したときは新しい値に変更します。")]

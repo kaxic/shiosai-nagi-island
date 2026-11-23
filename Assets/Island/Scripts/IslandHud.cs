@@ -111,6 +111,7 @@ public partial class IslandHud : MonoBehaviour
     {
         float y = height - Margin - 37;
         KeyButton(new Rect(Margin, y, 134, 37), "F1", "島の案内", "help");
+        if (!game.IsPlacing && Button(new Rect(Margin + 142, y, 159, 37), game.State.passage ? "T　凪島に帰る" : "T　白砂の離島へ", true, false)) game.Sail();
         KeyButton(new Rect(width - Margin - 239, y, 128, 37), "Tab", "家具袋", "bag");
         KeyButton(new Rect(width - Margin - 104, y, 104, 37), "Esc", "手帳", "pause");
 
@@ -147,8 +148,8 @@ public partial class IslandHud : MonoBehaviour
             Card(x, messageY + 11, w, 32, Paper);
             Label(game.Notice, x + 8, messageY + 11, w - 16, 32, 14, Ink, TextAnchor.MiddleCenter, bold: true);
         }
-        if (!game.IsPlacing)
-            Label(width >= 860 ? "WASD ／ 矢印で移動　・　Shift で走る" : "WASD ／ 矢印で移動", Margin + 143, y + 1, width - 425, 35, 13, Paper, shadow: true);
+        if (!game.IsPlacing && width >= 800)
+            Label(width >= 1020 ? "WASD ／ 矢印で移動　・　Shift で走る" : "WASD ／ 矢印で移動", Margin + 316, y + 1, width - 598, 35, 13, Paper, shadow: true);
     }
 
     void KeyButton(Rect r, string key, string caption, string panel)
@@ -241,7 +242,7 @@ public partial class IslandHud : MonoBehaviour
         }
         GuideNote(sw, 245, "compass", "島の歩き方", "家のすぐ手前に作業台、右奥にかぶ畑、手前の広場に家具の区画があります。木と岩で素材を集め、作業台で家具を作りましょう。");
         GuideNote(sw, 346, "letter", "港からの依頼", "依頼帳で納品条件を確かめましょう。受け取った貝貨は道具の強化に使えます。交易では、余った木材・石材・かぶも貝貨に交換できます。");
-        GuideNote(sw, 447, "shell", "浜辺の図鑑", "海辺の採集地点を調べ、見つけた貝を集めましょう。開拓手帳から浜辺図鑑を開いて、これまでの発見を振り返れます。");
+        GuideNote(sw, 447, "shell", "浜辺の図鑑", "Tで白砂の離島へ渡れます。二つの島の6か所で、潮の引く瞬間に標本を拾いましょう。開拓手帳から浜辺図鑑を開いて、これまでの発見を振り返れます。");
         GuideNote(sw, 548, "planter", "島の庭展", "開拓手帳から島の庭展を開くと、公募のお題を読めます。家具の種類・並び方・向きを工夫して、広場を整えたら応募しましょう。");
         GUI.EndScrollView();
     }

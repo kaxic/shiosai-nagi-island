@@ -22,7 +22,7 @@ public static class IslandExhibitionCheck
 
     internal static void RunWithPlots(IslandSpot[] sceneSpots)
     {
-        var plots = sceneSpots.Where(s => s.kind == IslandSpot.Kind.FurnitureSlot)
+        var plots = sceneSpots.Where(s => s.kind == IslandSpot.Kind.FurnitureSlot && s.Center.x<32f)
             .OrderByDescending(s => s.Center.y).ThenBy(s => s.Center.x).ToArray();
         Check(plots.Length >= 8, "starter island has eight plots");
         var state = new IslandState();

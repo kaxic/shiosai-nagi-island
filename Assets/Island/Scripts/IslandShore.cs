@@ -2,25 +2,26 @@ using UnityEngine;
 
 public partial class IslandState
 {
+    public bool passage;
     [SerializeField] int specimenBits;
-    public bool HasSpecimen(int index) => index >= 0 && index < 9 && (specimenBits & (1 << index)) != 0;
+    public bool HasSpecimen(int index) => index >= 0 && index < IslandGame.SpecimenNames.Length && (specimenBits & (1 << index)) != 0;
     public bool RecordSpecimen(int index)
     {
-        if (index < 0 || index >= 9 || HasSpecimen(index)) return false;
+        if (index < 0 || index >= IslandGame.SpecimenNames.Length || HasSpecimen(index)) return false;
         specimenBits |= 1 << index;
         return true;
     }
     public int SpecimenCount
     {
-        get { int n = 0; for (int i = 0; i < 9; i++) if (HasSpecimen(i)) n++; return n; }
+        get { int n = 0; for (int i = 0; i < IslandGame.SpecimenNames.Length; i++) if (HasSpecimen(i)) n++; return n; }
     }
 }
 
 public sealed partial class IslandGame
 {
-    public static readonly string[] ShoreNames = {"桟橋の入り江","北の磯","東の砂州"};
+    public static readonly string[] ShoreNames = {"桟橋の入り江","北の磯","東の砂州","青磁の潟","風紋の入江","珊瑚岬"};
     public static readonly string[] SpecimenNames = {"桜色のホタテ","琥珀の巻き貝","すみれタカラガイ",
-        "白磁の二枚貝","星形のカシパン","紅枝サンゴ","波磨きのガラス","月縞オウムガイ","瑠璃の巻き貝"};
+        "白磁の二枚貝","星形のカシパン","紅枝サンゴ","波磨きのガラス","月縞オウムガイ","瑠璃の巻き貝","水鏡のクラゲ","朱色のヒトデ","青磁のウニ殻","渡り鳥の羽","黄金の海藻","巻石の化石","白墨の甲","扇サンゴ","真珠色の鮑殻"};
     public static readonly string[] SpecimenNotes = {
         "扇のような殻に、夕焼けを写したような薄紅色が差している。",
         "渦の奥には砂粒が二つ。陽にかざすと飴色の稜が光る。",
@@ -30,7 +31,7 @@ public sealed partial class IslandGame
         "長い旅で角が取れたサンゴのかけら。枝先だけがほのかに白い。",
         "かつて何色の瓶だったのだろう。海がその表面を曇らせた。",
         "曲線に沿って交互に走る縞。耳を寄せると潮騒が聞こえる。",
-        "深い青の渦に金色の筋が一本。島の浜辺図鑑を飾る一品。"};
+        "深い青の渦に金色の筋が一本。島の浜辺図鑑を飾る一品。","透明な傘に浮かぶ四つの輪が、水面の月を思わせる。","先の丸い五つの腕。岩に沿って静かに身を寄せる。","細かな突起が放射状に並ぶ、薄緑色の抜け殻。","短い風切羽に茶と金の斑。尾根を渡った風の跡。","干潮の浜に掛かった琥珀色の帯。波のかたちを写している。","古い石の内側に、かつての海の渦巻きが残る。","墨を吐く生き物の骨。泡ほど軽く、指に白い粉が移る。","細かな枝が扇をなし、小さな海流を通していた。","内側の薄層が青緑に光る。縁にはきれいに穴が並ぶ。"};
     float cameraZoom = 1, tideStart;
     public int Shore { get; private set; }
     public int LastSample { get; private set; } = -1;
@@ -57,7 +58,7 @@ public sealed partial class IslandGame
     }
     void StartTide(int shore)
     {
-        Shore = Mathf.Clamp(shore,0,2); tideStart = Time.unscaledTime; LastSample = -1;
+        Shore = Mathf.Clamp(shore,0,ShoreNames.Length-1); tideStart = Time.unscaledTime; LastSample = -1;
         SampleMessage = "波の印が色の帯と重なる瞬間に拾おう。帯ごとに違うものが見つかります。";
         Open("tide");
     }
@@ -72,7 +73,7 @@ public sealed partial class IslandGame
         LastSample = Shore * 3 + band;
         bool fresh = State.RecordSpecimen(LastSample);
         SampleMessage = (fresh ? "新発見　" : "観察　") + SpecimenNames[LastSample];
-        if (fresh && State.SpecimenCount == 9) SampleMessage = "浜辺図鑑が完成しました！";
+        if (fresh && State.SpecimenCount == SpecimenNames.Length) SampleMessage = "浜辺図鑑が完成しました！";
         if (fresh) ActionDone(SampleMessage, 3); else sounds.Play(1);
     }
     public void DeliverOrder()

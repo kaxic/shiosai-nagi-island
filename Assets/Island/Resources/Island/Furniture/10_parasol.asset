@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03e3608ae00d0f34a9ee39ede2eefd1e, type: 3}
+  m_Name: 10_parasol
+  m_EditorClassIdentifier: Assembly-CSharp::FurnitureRecipe
+  id: parasol
+  displayName: "\u5E06\u5E03\u306E\u30D1\u30E9\u30BD\u30EB"
+  woodCost: 4
+  stoneCost: 2
+  unlockAfterChapters: 0
+  prefab: {fileID: 6885530054366699064, guid: d41d715f21f1daf4b8ae2faf2da5c628, type: 3}

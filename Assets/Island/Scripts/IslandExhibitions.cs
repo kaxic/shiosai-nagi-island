@@ -81,7 +81,7 @@ public static class IslandExhibitions
         var result = new List<ExhibitPlot>();
         foreach (var spot in spots)
         {
-            if (spot.kind != IslandSpot.Kind.FurnitureSlot) continue;
+            if (spot.kind != IslandSpot.Kind.FurnitureSlot || (spot.Center.x>32f)!=state.passage) continue;
             var item = state.At(spot.id);
             // The seat and shelf both face local −Z, opposite the bench backrest and the shelf back.
             Vector3 front = spot.transform.rotation * Quaternion.Euler(0, 90 * (item?.turns ?? 0), 0) * Vector3.back;

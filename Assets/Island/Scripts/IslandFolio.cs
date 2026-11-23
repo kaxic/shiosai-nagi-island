@@ -4,7 +4,7 @@ using UnityEngine;
 public sealed class IslandFolio : MonoBehaviour
 {
     public IslandGame game;
-    Texture2D cover, specimens, shade;
+    Texture2D cover, specimens, passage, shade;
     Font sans, serif;
     GUIStyle textStyle;
     int page;
@@ -16,6 +16,7 @@ public sealed class IslandFolio : MonoBehaviour
     {
         cover = Resources.Load<Texture2D>("Island/Media/Harbor");
         specimens = Resources.Load<Texture2D>("Island/Media/Specimens");
+        passage = Resources.Load<Texture2D>("Island/Media/PassageSpecimens");
         sans = BrowserTools.ReadableFont(new[]{"Meiryo","Yu Gothic","Arial"},24);
         serif = BrowserTools.ReadableFont(new[]{"Yu Mincho","MS Mincho","Meiryo"},48);
         shade = new Texture2D(128,1,TextureFormat.RGBA32,false);
@@ -64,7 +65,8 @@ public sealed class IslandFolio : MonoBehaviour
     }
     void SampleIcon(Rect r,int index)
     {
-        if(specimens) GUI.DrawTextureWithTexCoords(r,specimens,
+        Texture2D plate=index<9?specimens:passage; index%=9;
+        if(plate) GUI.DrawTextureWithTexCoords(r,plate,
             new Rect(index%3/3f,(2-index/3)/3f,1f/3,1f/3));
     }
     void Notebook(float w,float h)
@@ -80,22 +82,24 @@ public sealed class IslandFolio : MonoBehaviour
         Fill(new Rect(x+30,y+90,640,1),Sea);
         if(album)
         {
-            for(int i=0;i<9;i++)
+            int first=page/9*9;
+            for(int i=first;i<first+9;i++)
             {
-                Rect tile=new Rect(x+31+i%3*94,y+111+i/3*94,87,87);
+                Rect tile=new Rect(x+31+i%3*94,y+111+(i-first)/3*94,87,87);
                 Fill(tile,i==page ? Gold : new Color(.83f,.86f,.76f));
                 Rect face=new Rect(tile.x+3,tile.y+3,81,81);
                 if(game.State.HasSpecimen(i))SampleIcon(face,i);
                 else Type(face,"？",27,Sea,true,TextAnchor.MiddleCenter);
                 if(GUI.Button(tile,GUIContent.none,GUIStyle.none))page=i;
             }
+            if(Button(new Rect(x+32,y+388,271,30),first==0?"白砂の離島を見る　›":"‹　凪島を見る"))page=first==0?9:0;
             bool known=game.State.HasSpecimen(page);
             Rect pic=new Rect(x+399,y+99,178,178);
             if(known) SampleIcon(pic,page); else Type(pic,"？",64,Sea,true,TextAnchor.MiddleCenter);
             Type(new Rect(x+325,y+275,340,40),known?IslandGame.SpecimenNames[page]:"まだ見ぬ漂着物",25,Ink,true);
             Type(new Rect(x+325,y+318,330,32),IslandGame.ShoreNames[page/3]+"　／　"+new[]{"左","中央","右"}[page%3]+"の波",15,Sea);
             Type(new Rect(x+325,y+354,330,70),known?IslandGame.SpecimenNotes[page]:"浜辺の青い目印を訪ね、引き波のタイミングを合わせましょう。",16,Ink);
-            Type(new Rect(x+32,y+413,270,42),$"採集の記録　{game.State.SpecimenCount} / 9",19,Sea);
+            Type(new Rect(x+32,y+413,270,42),$"採集の記録　{game.State.SpecimenCount} / {IslandGame.SpecimenNames.Length}",19,Sea);
         }
         else
         {

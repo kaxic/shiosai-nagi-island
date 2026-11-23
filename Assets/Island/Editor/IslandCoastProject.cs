@@ -112,8 +112,8 @@ public static class IslandCoastProject
     {
         Upgrade();
         var state=new IslandState();
-        for(int i=0;i<9;i++) if(!state.RecordSpecimen(i)||state.RecordSpecimen(i))throw new Exception("Specimen registration "+i);
-        if(state.SpecimenCount!=9)throw new Exception("Gallery");
+        for(int i=0;i<IslandGame.SpecimenNames.Length;i++) if(!state.RecordSpecimen(i)||state.RecordSpecimen(i))throw new Exception("Specimen registration "+i);
+        if(state.SpecimenCount!=IslandGame.SpecimenNames.Length)throw new Exception("Gallery");
         IslandCampaignCheck.Run();
         IslandExhibitionCheck.Run();
         CreateReviewSave();
@@ -138,7 +138,7 @@ public static class IslandCoastProject
         Exhibit("birdhouse","plot-1-4",0);Exhibit("planter","plot-2-2",0);
         Exhibit("daybed","plot-2-3",0);Exhibit("brazier","plot-2-4",0);
         s.TryPlant(1,101);
-        for(int i=0;i<9;i++)s.RecordSpecimen(i);
+        for(int i=0;i<IslandGame.SpecimenNames.Length;i++)s.RecordSpecimen(i);
         if(!IslandSave.Write(Path.Combine(path,"review-save.json"),s))throw new Exception("Preview save");
     }
 }
