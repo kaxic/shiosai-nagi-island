@@ -1,12 +1,14 @@
-# 凪島だより
+# A 島の開拓と庭づくり
+
+凪島だより
 
 小さな島で家と畑を整え、港に船を呼ぶWindows向けの3D開拓ゲームです。渡し守の最初の頼みは、傷んだ船着き場の修繕。木と岩のそばで E を押して木材3と石2を集めましょう。J で依頼を開き、「依頼を納品する」を押すと第一便が出ます。
 
-**[ブラウザーで遊ぶ](https://kaxic.github.io/shiosai-nagi-island/)**
+**[ブラウザーで遊ぶ](https://kaxic.github.io/shiosai-nagi-island/)** ・ [A〜Fのゲーム一覧](https://kaxic.github.io/shiosai-game-library/#A)
 
 [実際のプレイ映像を見る](https://kaxic.github.io/shiosai-nagi-island/media/demo.mp4)
 
-![凪島だよりのゲーム画面](IslandPreview.jpg)
+![A 島の開拓と庭づくりのゲーム画面](IslandPreview.jpg)
 
 [遊び方と手動で拡張する方法](遊び方と編集.md)
 

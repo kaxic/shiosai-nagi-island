@@ -74,11 +74,11 @@ public partial class IslandHud : MonoBehaviour
     void Header()
     {
         float x = Margin, y = Margin;
-        Card(x, y, 206, 61, Ink);
+        Card(x, y, 286, 61, Ink);
         Box(x + 9, y + 9, 43, 43, Gold);
         Symbol("island", x + 12, y + 12, 37, Forest);
-        Label("N A G I   I S L A N D", x + 63, y + 6, 137, 17, 10, Mint, bold: true);
-        Label("凪島だより", x + 61, y + 20, 141, 34, 26, Paper, serif: true);
+        Label("凪島だより　／　NAGI ISLAND", x + 62, y + 6, 218, 17, 10, Mint, bold: true);
+        Label(IslandGame.TitleName, x + 61, y + 20, 219, 34, 19, Paper, serif: true);
 
         var order = new Rect(x, y + 69, 225, 57);
         bool ready = game.State.CanDeliverOrder;

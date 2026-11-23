@@ -5,6 +5,7 @@ using UnityEngine;
 
 public sealed partial class IslandGame : MonoBehaviour
 {
+    public const string TitleName = "A 島の開拓と庭づくり";
     [Header("島の設定")]
     public Transform player;
     public Transform playerVisual;
@@ -53,6 +54,7 @@ public sealed partial class IslandGame : MonoBehaviour
 
     void Awake()
     {
+        BrowserHome.Register(transform, QuitGame);
         Application.targetFrameRate = 60;
         savePath = Path.Combine(Application.persistentDataPath, "island-v1.json");
         string review = IslandPhoto.ReviewDirectory();

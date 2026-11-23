@@ -2,23 +2,23 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#15272a"><title>凪島だより | 潮彩作品集</title>
+  <meta name="theme-color" content="#15272a"><title>A 島の開拓と庭づくり | 潮彩作品集</title>
   <link rel="icon" href="icon.png"><link rel="stylesheet" href="player.css"><link rel="stylesheet" href="touch.css"><script defer src="touch.js"></script>
 </head>
 <body>
-<header><span class="imprint">潮彩作品集</span><a href="https://github.com/kaxic/shiosai-nagi-island">GitHub ↗</a></header>
+<header><a class="imprint" id="library-home" href="https://kaxic.github.io/shiosai-game-library/#A"><span aria-hidden="true">← </span>ゲーム一覧</a><span id="home-status" role="status"></span><a href="https://github.com/kaxic/shiosai-nagi-island">GitHub ↗</a></header>
 <main>
   <section id="stage" aria-label="ゲーム画面">
-    <canvas id="game" data-game="Island" width="1280" height="720" tabindex="0" aria-label="凪島だよりのゲーム画面"></canvas>
+    <canvas id="game" data-game="Island" width="1280" height="720" tabindex="0" aria-label="A 島の開拓と庭づくりのゲーム画面"></canvas>
     <div id="cover">
-      <div class="titleblock"><p class="genre">島の開拓と生活</p><h1>凪島だより</h1><p class="intro">海辺に小屋を構え、庭をつくる。
+      <div class="titleblock"><p class="genre">凪島だより</p><h1>A 島の開拓と庭づくり</h1><p class="intro">海辺に小屋を構え、庭をつくる。
 波打ち際の標本を集め、港に船を呼ぶ島の暮らし。</p>
         <button id="launch">ゲームを開始 <span aria-hidden="true">›</span></button>
         <div id="status" role="status" aria-live="polite"></div><progress id="meter" max="1" value="0" hidden></progress>
       </div>
     </div>
   </section>
-  <div class="bar"><span class="wordmark">凪島だより</span><div class="buttons"><button id="help">操作方法</button><button id="full">全画面</button><a id="demo" href="media/demo.mp4" hidden>プレイ映像 ▷</a></div></div>
+  <div class="bar"><span class="wordmark">A 島の開拓と庭づくり</span><div class="buttons"><button id="help">操作方法</button><button id="full">全画面</button><a id="demo" href="media/demo.mp4" hidden>プレイ映像 ▷</a></div></div>
   <dialog id="guide"><div class="dialogtop"><h2>操作方法</h2><button class="close">閉じる</button></div><p>キーボードとマウスで遊べます。進行はこのブラウザーに保存されます。</p><div id="controls">WASD・矢印で移動、Shiftで走ります。木や石のそばでEを押して採集します。
 Tabで家具袋、Rで回転や回収、Jで依頼、Uで強化、Escで手帳、F1で案内、F12で写真を撮れます。</div></dialog>
   <dialog id="album"><div class="dialogtop"><h2>写真の保存</h2><button class="close">閉じる</button></div><div id="prints"></div></dialog>
@@ -32,7 +32,7 @@ const meter=document.getElementById('meter');
 let instance=null;
 const build='Build/';
 const config={
-  dataUrl:build+'c843267bfc7566d2077acef4b0a56ddd.data.unityweb',frameworkUrl:build+'fb7f70a21f42fbc208e049e5caf2a0bf.framework.js.unityweb',codeUrl:build+'2daea15f94b7b94296a63291e2f0d0e8.wasm.unityweb',
+  dataUrl:build+'4c58a45064eb03a83760c8b5fe7c4bca.data.unityweb',frameworkUrl:build+'adbf44814b7958692bad3ad4bf1565c8.framework.js.unityweb',codeUrl:build+'6b2c36f79c931de35672ed3c5bdcaca9.wasm.unityweb',
   streamingAssetsUrl:'StreamingAssets',companyName:'NagiIsland',productName:'Nagi Island',productVersion:'2.0',
   devicePixelRatio:Math.min(1.5,window.devicePixelRatio||1),
   showBanner:function(message,type){ if(type==='error'){statusLine.textContent='読み込みに失敗しました。ページを再読み込みしてください。';console.error(message);} }
@@ -40,12 +40,19 @@ const config={
 async function startGame(){
   launchButton.disabled=true; statusLine.textContent='ゲームを読み込んでいます…';meter.hidden=false;
   try{
-    if(typeof createUnityInstance!=='function')await new Promise((resolve,reject)=>{const s=document.createElement('script'); s.src=build+'433a1b9aed261c6a97b98e0778347ca6.loader.js';s.onload=resolve;s.onerror=reject;document.head.appendChild(s);});
+    if(typeof createUnityInstance!=='function')await new Promise((resolve,reject)=>{const s=document.createElement('script'); s.src=build+'836063e867163e64bb01b754db683a8c.loader.js';s.onload=resolve;s.onerror=reject;document.head.appendChild(s);});
     instance=await createUnityInstance(canvas,config,value=>{meter.value=value;statusLine.textContent='読み込み中　'+Math.round(100*value)+'%';});
     cover.hidden=true;canvas.focus();document.body.classList.add('playing');
   }catch(e){statusLine.textContent='ゲームを開始できませんでした。WebGL 2に対応したブラウザーで再試行してください。';meter.hidden=true;launchButton.disabled=false;console.error(e);}
 }
 launchButton.addEventListener('click',startGame);
+document.getElementById('library-home').addEventListener('click',event=>{
+  if(!instance||event.button!==0||event.metaKey||event.ctrlKey||event.altKey||event.shiftKey)return;
+  event.preventDefault();
+  document.getElementById('home-status').textContent='保存してゲーム一覧へ戻ります…';
+  instance.SendMessage('ShiosaiLibraryNavigation','GoHome');
+});
+window.shiosaiHomeFailed=()=>{document.getElementById('home-status').textContent='保存に失敗しました。ゲーム一覧をもう一度押してください。';};
 document.getElementById('full').addEventListener('click',()=>{if(instance){instance.SetFullscreen(1);canvas.focus();}else document.getElementById('stage').requestFullscreen?.();});
 document.getElementById('help').addEventListener('click',()=>document.getElementById('guide').showModal());
 document.querySelectorAll('dialog .close').forEach(b=>b.onclick=()=>b.closest('dialog').close());
